@@ -5,7 +5,7 @@ const appState = {
 }
 
 let sort_type = ""
-api = "http://localhost:3000/api";
+api = "https://fourthproject.herokuapp.com/api";
 
 
 document.addEventListener('DOMContentLoaded', function() {

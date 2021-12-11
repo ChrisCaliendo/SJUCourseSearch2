@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="frontendCSS.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="frontendJS.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <title>SJU Course Search</title>
+</head>
+<body>
+
+    <div id="webpage_header" class="jumbotron">
+        <h1 class="display-3">SJU Course Information</h1>
+        <p class="lead"> 
+            This is a web application made to display course information for St. Johns University programs and courses.
+        </p>
+        <hr class="my-2">
+        <div id="sub_header">
+            <p></p>
+            <p class="lead">
+                <button id="start_button" class="btn btn-light btn-lg" role="button">View Courses</button>
+            </p>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div id="courseSearch" class="container-sm rounded-lg">
+        
+        <div id="search_title">
+            <h2>Course Search</h2>
+        </div>
+        
+
+            <div id="search_method_selector">
+
+                <p>
+                    Select a method to sort by the courses, fill in all inputs and hit submit.
+                </p>
+
+                <div class="row">
+                    <label id="radioStyle" class="rounded-lg form-check-label"><input type="radio" id="search_method_option" name="search_method_option" value="all">Show All Courses</label>
+                    <label id="radioStyle" class="rounded-lg form-check-label"><input type="radio" id="search_method_option" name="search_method_option" value="course_code">By Course Code</label>
+                    <label id="radioStyle" class="rounded-lg form-check-label"><input type="radio" id="search_method_option" name="search_method_option" value="title">By Title</label>
+                    <label id="radioStyle" class="rounded-lg form-check-label"><input type="radio" id="search_method_option" name="search_method_option" value="instructor">By Instructor</label>
+                    <label id="radioStyle" class="rounded-lg form-check-label"><input type="radio" id="search_method_option" name="search_method_option" value="level">By Level</label>
+                    <label id="radioStyle" class="rounded-lg form-check-label"><input type="radio" id="search_method_option" name="search_method_option" value="name_and_level">By Instructor and Level</label>
+                </div>
+            </div>   
+
+            <br>
+            <br>
+            <div id="search_method"></div>
+            <br>
+
+        <button id="search_button" class="btn btn-dark" type="button">Submit</button>
+
+        
+    </div>
+
+    <br>
+    <br>
+
+    <div id="userView" ></div>
+
+    <br>
+    <br>
+    <br>
+
+</body>
+
+<script id="result" type="text/x-handlebars-template">
+    <div class="container-sm">
+        {{#each filtered_courses}}
+        <div class="card">
+            <div class="card-header">
+                <h4>{{this.title}}</h4>
+            </div>
+            <div class="card-body">
+                <p id="course_level" >{{this.course_level}} Course</p>
+                <p>Assigned Instructor: <span id="instructor">{{this.instructor}}</span></p>
+                <p>Course Code: <span id="course_code">{{this.course_code}}</span></p>
+            </div>
+        </div>
+        <br>
+        <br>
+        {{/each}}
+    </div>
+</script>
+
+<script id="searchAll" type="text/x-handlebars-template">
+    <div class="container-sm">
+        <p>
+        No inputs required to search all courses, press submit or pick a search specification
+        </p>
+    </div>
+</script>
+
+<script id="codeSearch" type="text/x-handlebars-template">
+    <div class="container-sm">
+        <input type="text" id="textInput" placeholder="Course Code">
+    </div>
+</script>
+
+<script id="titleSearch" type="text/x-handlebars-template">
+    <div class="container-sm">
+        <input type="text" id="textInput" placeholder="Course Title">
+    </div>
+</script>
+
+<script id="instructorSearch" type="text/x-handlebars-template">
+    <div class="container-sm">
+        <input type="text" id="textInput" placeholder="Instructors Name">
+    </div>
+</script>
+
+<script id="levelSearch" type="text/x-handlebars-template">
+    <div id="radioInput" class="container-sm">
+        <input type="radio" id="levelOption" name="levelOption" value="undergraduate">Undergraduate
+        <input type="radio" id="levelOption" name="levelOption" value="graduate">Graduate  
+    </div>
+</script>
+
+<script id="combinedSearch" type="text/x-handlebars-template">
+    <div class="container-sm">
+        <input type="text" id="textInput" placeholder="Instructors" Name>
+        <br>
+        <div id="radioInput">
+            <input type="radio" id="levelOption" name="levelOption" value="undergraduate">Undergraduate
+            <input type="radio" id="levelOption" name="levelOption" value="graduate">Graduate
+        </div>
+    </div>
+</script>
+

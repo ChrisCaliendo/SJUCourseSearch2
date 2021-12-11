@@ -1,0 +1,62 @@
+body {
+	background: rgb(221, 143, 104) !important;
+}
+
+hr {
+	background-color: aliceblue;
+}
+
+p {
+	font-family: 'Helvetica';
+}
+
+.card-header {
+	background-color: rgb(81, 83, 90) !important;
+	color: white;
+}
+
+#webpage_header {
+	background: rgb(66, 71, 83);
+	color: aliceblue;
+	text-align: center;
+}
+
+#webpage_header button {
+	background: rgb(208, 115, 68);
+	color: aliceblue;
+	border-color: rgb(66, 71, 83);
+}
+
+#courseSearch {
+	background: aliceblue;
+	padding: 30px;
+}
+
+#course_level {
+	text-transform: capitalize;
+}
+
+#instructor {
+	font-family: 'Times New Roman';
+	font-size: large;
+}
+
+#course_code {
+	font-weight: bold;
+}
+
+#search_button {
+	text-align: center;
+}
+
+#search_method_option {
+	margin: 5px;
+}
+
+#radioStyle {
+	display: inline-block;
+	background-color: rgb(255, 130, 92);
+	padding: 4px;
+	border: 1px;
+	border-style: solid;
+}
